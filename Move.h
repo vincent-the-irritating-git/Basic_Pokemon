@@ -20,7 +20,7 @@ struct Move {
 	}
 };
 
-/*we must remember moves like dig and fury swipes, remember*/
+/*we must remember moves like dig and fury swipes*/
 
 //attack move has, in addition, a power and a status
 struct Attack_Move:public Move {
