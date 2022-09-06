@@ -1,5 +1,5 @@
 #pragma once
-#include "Constants.h"
+#include "Pokemon Names.h"
 #include "Pokemon.h"
 #include "Pokemon_Pokedex.h"
 
@@ -38,5 +38,6 @@ public:
 	void set_ai();
 	double get_stun_chance();
 	Status_Effect_Change& get_status_effect();
+	void decrement_sleep_counter();
 };
 

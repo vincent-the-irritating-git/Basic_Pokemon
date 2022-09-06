@@ -3,17 +3,18 @@
 #include <unordered_map>
 #include "Pokemon.h"
 #include "Pokemon_Pokedex.h"
-#include "Constants.h"
+#include "Pokemon Names.h"
 #include "Stats_n_Status.h"
 #include "Move.h"
 #include "Move_Pokedex.h"
 #include "Battle_Pokemon.h"
 
 int main() {
-	for (auto m : Move_Pokedex::gen1_moves) {
-		std::cout << m.first << std::endl;
-	}
+
 	std::cout << std::endl;
-	const Move* m = Move_Pokedex::get_gen1_moves("Thunder Shock");
+	const Move* m = Move_Pokedex::get_gen1_moves("Growl");
 	m->show_move_values();
+
+	for(const Move* m:Move_Pokedex::get_gen1_default_movesets("Pikachu"))
+		std::cout<<m->m_name<<std::endl;
 }

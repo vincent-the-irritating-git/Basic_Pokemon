@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
-#include "Constants.h"
+#include "Pokemon Names.h"
+#include "Move Constants.h"
 #include "Pokemon.h"
 #include "Battle_Pokemon.h"
 #include "Pokemon_Pokedex.h"
@@ -28,7 +29,9 @@ public:
 	static void DEBUG_SET_USER(Gen1_Pokemon);
 	static void DEBUG_SET_ENEMY(Gen1_Pokemon);
 	static std::array<Battle_Pokemon*, 2> DEBUG_get_turn_order();
+	static bool stun_check(Battle_Pokemon& current);
 	static void start_battle();
+	static void apply_post_stun(Battle_Pokemon& current);
 	//this should be in BP
 	static bool is_stunned(Battle_Pokemon& current);
 	static bool is_status_effect_a_stun(Battle_Pokemon& current);

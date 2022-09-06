@@ -1,10 +1,10 @@
 #pragma once
 #include <array>
 #include "Move.h"
-#include "Constants.h"
+#include "Pokemon Names.h"
 
 class Move_Pokedex {
-public:
+private:
 	const static std::unordered_map<std::string, Move*>gen1_moves;
 	const static std::unordered_map < std::string, const std::array<const Move*, 4>>gen1_default_movesets;
 public:

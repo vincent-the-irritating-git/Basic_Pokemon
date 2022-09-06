@@ -148,14 +148,16 @@
     <ClCompile Include="Move_Pokedex.cpp" />
     <ClCompile Include="Pokemon.cpp" />
     <ClCompile Include="Pokemon_Pokedex.cpp" />
-    <ClCompile Include="Constants.cpp" />
+    <ClCompile Include="Move Constants.cpp" />
+    <ClCompile Include="Pokemon Names.cpp" />
     <ClCompile Include="Stats_n_Status.cpp" />
     <ClCompile Include="Type.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Battle_Event.h" />
     <ClInclude Include="Battle_Pokemon.h" />
-    <ClInclude Include="Constants.h" />
+    <ClInclude Include="Move Constants.h" />
+    <ClInclude Include="Pokemon Names.h" />
     <ClInclude Include="Move.h" />
     <ClInclude Include="Move_Pokedex.h" />
     <ClInclude Include="Pokemon.h" />

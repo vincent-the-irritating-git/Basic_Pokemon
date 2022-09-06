@@ -6,7 +6,3 @@ namespace Pokemon_names {
 	extern const std::string PIKACHU;
 	extern const std::string PINSIR;
 }
-namespace Move_constants {
-	extern const std::string NULL_MOVE;
-	extern const int MAX_MOVES;
-}

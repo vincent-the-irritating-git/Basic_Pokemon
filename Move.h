@@ -14,7 +14,6 @@ struct Move {
 	Type_Data* m_type = &Type::NORMAL;
 	Move();
 	Move(std::string, int, int, Type_Data&);
-	//elon musk is a twat
 	bool operator==(const Move&)const;
 	virtual void show_move_values()const {
 		std::cout << "If you're seeing this, something's gone wrong." << std::endl;
@@ -46,5 +45,6 @@ struct Stats_Value_Attack_Move : public Attack_Move {
 struct Defence_Move :public Move {
 	Stats_Change m_stats_change;
 	Defence_Move(std::string name, int pp, int accuracy, Type_Data& type, Stats_Change status);
+	virtual 
 	void show_move_values()const override;
 };

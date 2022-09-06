@@ -82,3 +82,7 @@ void Battle_Pokemon::set_ai()
 {
 	is_human = false;
 }
+
+void Battle_Pokemon::decrement_sleep_counter() {
+	--this->sleep_counter;
+}

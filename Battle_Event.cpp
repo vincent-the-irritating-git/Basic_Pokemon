@@ -83,17 +83,18 @@ void Battle_Event::turn(Battle_Pokemon* current, Battle_Pokemon* opposing) {
 }
 
 void Battle_Event::human_turn(Battle_Pokemon& bp) {
-	int user_move_choice = -1;
 	display_moves(bp);
-	user_move_choice = select_move(bp);
+	int user_move_choice = select_move(bp);
 	const Move& chosen_move = retrieve_move_from_map(bp, user_move_choice);
-	if (is_stunned(bp)) {
-		show_stun_message(get_stun_message(bp));
+	if (Battle_Event::stun_check(bp)) {
+		//show_stun_message();
+		Battle_Event::apply_post_stun(bp);
 		return;
 	}
 	//break()
 	//determine_move_class(chosen_move);
 	//check_fainted();
+	//apply_post_turn_effects();
 }
 
 const Move& Battle_Event::retrieve_move_from_map(Battle_Pokemon& bp, int m) {
@@ -101,7 +102,7 @@ const Move& Battle_Event::retrieve_move_from_map(Battle_Pokemon& bp, int m) {
 	const Move& move = *(Move_Pokedex::get_gen1_default_movesets(name).at(m));
 	if (!is_NULL_MOVE(move))
 		return *(Move_Pokedex::get_gen1_default_movesets(name).at(m));
-	else
+	else 
 		select_move(bp);
 }
 
@@ -150,10 +151,18 @@ bool Battle_Event::is_NULL_MOVE(const Move& move) {
 	return false;
 }
 
+bool Battle_Event::stun_check(Battle_Pokemon& bp) {
+	if (Battle_Event::is_status_effect_a_stun(bp))
+		return Battle_Event::calculate_if_stunned(bp);
+}
+
+void Battle_Event::apply_post_stun(Battle_Pokemon& bp) {
+	if (bp.get_status_effect().get_status_effect_name() == status_effect::SLEEP.get_status_effect_name())
+		bp.decrement_sleep_counter();
+}
+
 bool Battle_Event::is_stunned(Battle_Pokemon& bp) {
-	if (is_status_effect_a_stun(bp))
-		return calculate_if_stunned(bp);
-	return false;
+	return calculate_if_stunned(bp);
 }
 
 bool Battle_Event::is_status_effect_a_stun(Battle_Pokemon& bp) {
