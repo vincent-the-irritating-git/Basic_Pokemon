@@ -14,10 +14,10 @@ namespace {
 		using namespace move_names;
 		Attack_Move NULL_MOVE(move_names::NULL_MOVE, 0, 0, Type::NONE, 0);
 		//Status_Effect_Attack_Move poison_powder("Poison Powder", 15, 75, Type::POISON, 0, Status_Effect_Change(status_effect_value::POISON, 100));
-		Stats_Value_Attack_Move growl(GROWL, 40, 100, Type::NORMAL, 0, Stats_Change(status_and_stats::stats_value::ATTACK, 1));
+		Stats_Value_Attack_Move growl(GROWL, 40, 100, Type::NORMAL, 0, Stats_Change(status_and_stats::stats_value::ATTACK, -50));
 		Status_Effect_Attack_Move thundershock(THUNDER_SHOCK, 30, 100, Type::ELECTRIC, 40, status_effect::PARALYSIS, 10);
 		Attack_Move tackle(TACKLE, 35, 95, Type::NORMAL, 35);
-		Defence_Move defence_curl(DEFENCE_CURL, 40, 100, Type::NORMAL, Stats_Change(status_and_stats::stats_value::DEFENCE, 1));
+		Defence_Move defence_curl(DEFENCE_CURL, 40, 100, Type::NORMAL, Stats_Change(status_and_stats::stats_value::DEFENCE, 50));
 		Status_Effect_Attack_Move thunder_wave(THUNDER_WAVE, 20, 100, Type::ELECTRIC, 0, status_effect::PARALYSIS,100);
 	}
 }

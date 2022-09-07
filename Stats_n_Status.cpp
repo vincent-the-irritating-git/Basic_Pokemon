@@ -23,7 +23,9 @@ namespace {
 			{ stats_value::SPECIAL, "SPECIAL" },
 			{ stats_value::SPECIAL_ATTACK, "SPECIAL ATTACK" },
 			{ stats_value::SPECIAL_DEFENCE, "SPECIAL DEFENCE" },
-			{ stats_value::SPEED, "SPEED" }
+			{ stats_value::SPEED, "SPEED" },
+			{stats_value::ACCURACY, "ACCURACY"},
+			{stats_value::EVASION, "EVASION"}
 		};
 	}
 

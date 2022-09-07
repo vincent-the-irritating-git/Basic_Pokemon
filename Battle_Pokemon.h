@@ -2,6 +2,8 @@
 #include "Pokemon Names.h"
 #include "Pokemon.h"
 #include "Pokemon_Pokedex.h"
+#include <unordered_map>
+#include "Stats_n_Status.h"
 
 //we will need two classes, one for each
 class Battle_Pokemon
@@ -13,12 +15,8 @@ class Battle_Pokemon
 private:
 	Status_Effect_Change* m_status_effect = &status_effect::NORMAL;
 	const Gen1_Pokemon* pokemon_ptr = nullptr;
-	int attack_modifier = 1;
-	int defence_modifier = 1;
-	int speed_modifier = 1;
-	int special_modifier = 1;
+	static std::unordered_map <status_and_stats::stats_value, int>stats_modifiers;
 	int hp=1;
-	int critical_hit_ratio = 1;
 	int m_stun_chance = 0;
 	int sleep_counter=0;
 	bool is_human = true;
@@ -33,11 +31,14 @@ public:
 	int modified_speed()const;
 	int modified_special()const;
 	int modified_critical()const;
+	int modified_accuracy()const;
+	int modified_evasion()const;
 	void show_battle_stats()const;
 	bool get_is_human() const;
 	void set_ai();
 	double get_stun_chance();
 	Status_Effect_Change& get_status_effect();
 	void decrement_sleep_counter();
+	void reset_all_stats();
 };
 
