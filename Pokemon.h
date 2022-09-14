@@ -50,7 +50,6 @@ public:
 			{status_and_stats::stats_value::DEFENCE,0},
 			{status_and_stats::stats_value::SPEED,0},
 			{status_and_stats::stats_value::SPECIAL,0},
-			{status_and_stats::stats_value::CRITICAL_HIT_RATIO,0}
 		};
 	};
 protected:

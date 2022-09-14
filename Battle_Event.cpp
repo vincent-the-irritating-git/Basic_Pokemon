@@ -91,6 +91,7 @@ void Battle_Event::human_turn(Battle_Pokemon& bp) {
 		Battle_Event::apply_post_stun(bp);
 		return;
 	}
+	
 	//break()
 	//determine_move_class(chosen_move);
 	//check_fainted();
@@ -236,6 +237,23 @@ void Battle_Event::select_enemy_pokemon()
 	const Gen1_Pokemon pokemon = (Pokemon_Pokedex::get_gen1_pokemon(choice));
 	ai = Battle_Pokemon(pokemon);
 	ai.set_ai();
+}
+
+std::vector<Battle_Pokemon*> Battle_Event::get_targets(const Move& move)
+{
+	std::vector<Battle_Pokemon*>targets;
+	//enemy
+	if (move.is_target_enemy && !move.is_target_self)
+		targets.push_back(Battle_Event::opposing);
+	//self
+	if (!move.is_target_enemy && move.is_target_self)
+	targets.push_back(Battle_Event::current);
+	//both
+	if (move.is_target_enemy && move.is_target_self) {
+		targets.push_back(Battle_Event::opposing);
+		targets.push_back(Battle_Event::current);
+	}
+	return targets;
 }
 
 void Battle_Event::battle() {

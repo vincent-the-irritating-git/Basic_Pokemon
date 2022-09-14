@@ -17,4 +17,8 @@ int main() {
 
 	for(const Move* m:Move_Pokedex::get_gen1_default_movesets("Pikachu"))
 		std::cout<<m->m_name<<std::endl;
+
+	Battle_Pokemon bPik(Pokemon_Pokedex::get_gen1_pokemon("Pikachu"));
+	bPik.show_battle_stats();
+	int nums[5]{};
 }

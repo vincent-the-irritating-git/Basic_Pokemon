@@ -18,13 +18,14 @@ Battle_Pokemon::Battle_Pokemon(const Gen1_Pokemon& pokemon) {
 }
 
 std::unordered_map<status_and_stats::stats_value, int> Battle_Pokemon::stats_modifiers{
-	{stats_value::ATTACK, 0},
-	{stats_value::DEFENCE, 0},
-	{stats_value::SPEED, 0},
-	{stats_value::SPECIAL, 0},
-	{stats_value::CRITICAL_HIT_RATIO, 0},
-	{stats_value::ACCURACY, 0},
-	{stats_value::EVASION, 0}
+	{stats_value::ATTACK, 1},
+	{stats_value::DEFENCE, 1},
+	{stats_value::SPEED, 1},
+	{stats_value::SPECIAL, 1},
+	//TODO these need to be calibrated later
+	{stats_value::CRITICAL_HIT_RATIO, 1},
+	{stats_value::ACCURACY, 1},
+	{stats_value::EVASION, 1}
 };
 
 std::string Battle_Pokemon::get_battle_pokemon_name()
@@ -57,15 +58,15 @@ int Battle_Pokemon::modified_special()const
 }
 
 int Battle_Pokemon::modified_critical()const {
-	return pokemon_ptr->get_m_stats().at(stats_value::CRITICAL_HIT_RATIO) * Battle_Pokemon::stats_modifiers.at(stats_value::CRITICAL_HIT_RATIO);
+	return 1 * Battle_Pokemon::stats_modifiers.at(stats_value::CRITICAL_HIT_RATIO);
 }
 
 int Battle_Pokemon::modified_accuracy()const {
-	return pokemon_ptr->get_m_stats().at(stats_value::ACCURACY) * Battle_Pokemon::stats_modifiers.at(stats_value::ACCURACY);
+	return 1 * Battle_Pokemon::stats_modifiers.at(stats_value::ACCURACY);
 }
 
 int Battle_Pokemon::modified_evasion()const {
-	return pokemon_ptr->get_m_stats().at(stats_value::EVASION) * Battle_Pokemon::stats_modifiers.at(stats_value::EVASION);
+	return 1 * Battle_Pokemon::stats_modifiers.at(stats_value::EVASION);
 }
 
 double Battle_Pokemon::get_stun_chance()
@@ -85,7 +86,9 @@ void Battle_Pokemon::show_battle_stats()const
 	std::cout << "Defence is " << modified_defence() << std::endl;
 	std::cout << "Speed is " << modified_speed() << std::endl;
 	std::cout << "Special is " << modified_special() << std::endl;
-	std::cout << "Critical hit ratio is " << Battle_Pokemon::stats_modifiers.at(stats_value::CRITICAL_HIT_RATIO) << std::endl;
+	std::cout << "Critical hit ratio is " << modified_critical() << std::endl;
+	std::cout << "Accuracy is " << modified_accuracy() << std::endl;
+	std::cout << "Evasion is " << modified_evasion() << std::endl;
 	std::cout << std::endl;
 }
 

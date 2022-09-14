@@ -5,7 +5,8 @@
 #include "Stats_n_Status.h"
 
 struct Move {
-	bool is_target_enemy = true;
+	virtual bool is_target_enemy() { return true; }
+	bool is_target_self = false;
 	bool is_status_inflicting = false;
 	bool is_stats_changing = false;
 	std::string m_name = "";
