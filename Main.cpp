@@ -20,5 +20,6 @@ int main() {
 
 	Battle_Pokemon bPik(Pokemon_Pokedex::get_gen1_pokemon("Pikachu"));
 	bPik.show_battle_stats();
-	int nums[5]{};
+	int x[55];
+	std::cout << std::size(x);
 }

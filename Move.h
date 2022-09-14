@@ -5,7 +5,7 @@
 #include "Stats_n_Status.h"
 
 struct Move {
-	virtual bool is_target_enemy() { return true; }
+	bool is_target_enemy = true;
 	bool is_target_self = false;
 	bool is_status_inflicting = false;
 	bool is_stats_changing = false;
@@ -19,6 +19,7 @@ struct Move {
 	virtual void show_move_values()const {
 		std::cout << "If you're seeing this, something's gone wrong." << std::endl;
 	}
+	virtual int get_power()const { return 0; }
 };
 
 /*we must remember moves like dig and fury swipes*/
@@ -28,6 +29,7 @@ struct Attack_Move:public Move {
 	int m_power = 0;
 	Attack_Move(std::string name, int pp, int accuracy, Type_Data& type, int power);
 	void show_move_values()const override;
+	virtual int get_power()const override;
 };
 
 struct Status_Effect_Attack_Move : public Attack_Move {
@@ -45,7 +47,6 @@ struct Stats_Value_Attack_Move : public Attack_Move {
 
 struct Defence_Move :public Move {
 	Stats_Change m_stats_change;
-	Defence_Move(std::string name, int pp, int accuracy, Type_Data& type, Stats_Change status);
-	virtual 
+	Defence_Move(std::string name, int pp, int accuracy, Type_Data& type, Stats_Change status); 
 	void show_move_values()const override;
 };

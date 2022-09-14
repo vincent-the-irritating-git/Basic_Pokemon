@@ -116,10 +116,6 @@ void Battle_Event::do_move(Battle_Pokemon& bp, const Move& chosen_move) {
 	//inflict_stats_change();
 }
 
-void Battle_Event::inflict_damage(Battle_Pokemon& bp, const Attack_Move& move) {
-	//int damage = (move->m_power * bp->modified_attack() / defending.defence) / 50 + 2 * critical() * random() * STAB * type * burn;
-}
-
 //TODO we're only couting pointer address
 void Battle_Event::display_moves(Battle_Pokemon& bp) {
 	std::string name = bp.get_battle_pokemon_name();
@@ -254,6 +250,11 @@ std::vector<Battle_Pokemon*> Battle_Event::get_targets(const Move& move)
 		targets.push_back(Battle_Event::current);
 	}
 	return targets;
+}
+
+void Battle_Event::apply_damage(std::vector<Battle_Pokemon*> targets, const Move& move)
+{
+	//int damage = (move.get_power() * Battle_Event::current->modified_attack() / Battle_Event::opposing->modified_defence()) / 50 + 2 * critical() * random() * STAB * type * burn;
 }
 
 void Battle_Event::battle() {

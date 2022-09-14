@@ -44,6 +44,7 @@ public:
 	static std::string sleep_stun_message(Battle_Pokemon& current);
 	static void speed_check();
 	static std::vector<Battle_Pokemon*>get_targets(const Move& move);
+	static void apply_damage(std::vector < Battle_Pokemon*>targets, const Move& move);
 	Battle_Event();
 	static void select_pokemon_to_battle();
 	static void turn(Battle_Pokemon* current, Battle_Pokemon* opposing);

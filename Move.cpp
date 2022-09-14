@@ -21,6 +21,10 @@ void Attack_Move::show_move_values()const {
 	std::cout << std::endl;
 }
 
+int Attack_Move::get_power()const { 
+	return m_power; 
+}
+
 Status_Effect_Attack_Move::Status_Effect_Attack_Move(std::string name, int pp, int accuracy, Type_Data& type, int power, Status_Effect_Change& stats_effect, int status_effect_chance) :Attack_Move(name, pp, accuracy, type, power), m_status_effect_change(&stats_effect), m_status_effect_chance(status_effect_chance){
 	is_status_inflicting = true;
 	m_status_effect_change = &stats_effect;
