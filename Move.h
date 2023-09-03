@@ -5,6 +5,7 @@
 #include "Stats_n_Status.h"
 
 struct Move {
+protected:
 	bool is_target_enemy = true;
 	bool is_target_self = false;
 	bool is_status_inflicting = false;
@@ -13,8 +14,13 @@ struct Move {
 	int m_pp = 1;
 	int m_accuracy = 1;
 	Type_Data* m_type = &Type::NORMAL;
+public:
 	Move();
 	Move(std::string, int, int, Type_Data&);
+	std::string get_move_name()const;
+	Type_Data* get_type() const;
+	bool get_is_target_self() const;
+	bool get_is_target_enemy() const;
 	bool operator==(const Move&)const;
 	virtual void show_move_values()const {
 		std::cout << "If you're seeing this, something's gone wrong." << std::endl;

@@ -12,6 +12,19 @@ Move::Move(std::string name, int pp, int accuracy, Type_Data& type) : m_name(nam
 	m_type = &type;
 }
 
+std::string Move::get_move_name() const
+{
+	return m_name;
+}
+
+bool Move::get_is_target_enemy()const {
+	return is_target_enemy;
+}
+
+bool Move::get_is_target_self()const {
+	return is_target_self;
+}
+
 Attack_Move::Attack_Move(std::string name, int pp, int accuracy, Type_Data& type, int power):Move(name,pp,accuracy,type),m_power(power){
 	m_power = power;
 }
@@ -24,6 +37,11 @@ void Attack_Move::show_move_values()const {
 int Attack_Move::get_power()const { 
 	return m_power; 
 }
+
+Type_Data* Move::get_type() const {
+	return m_type;
+}
+
 
 Status_Effect_Attack_Move::Status_Effect_Attack_Move(std::string name, int pp, int accuracy, Type_Data& type, int power, Status_Effect_Change& stats_effect, int status_effect_chance) :Attack_Move(name, pp, accuracy, type, power), m_status_effect_change(&stats_effect), m_status_effect_chance(status_effect_chance){
 	is_status_inflicting = true;

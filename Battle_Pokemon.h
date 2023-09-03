@@ -26,6 +26,7 @@ public:
 	Battle_Pokemon();
 	~Battle_Pokemon();
 	Battle_Pokemon(const Gen1_Pokemon&);
+	const Gen1_Pokemon* get_pokemon();
 	int modified_attack()const;
 	int modified_defence()const;
 	int modified_speed()const;

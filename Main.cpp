@@ -7,19 +7,12 @@
 #include "Stats_n_Status.h"
 #include "Move.h"
 #include "Move_Pokedex.h"
+#include "Move_Names.h"
 #include "Battle_Pokemon.h"
+#include "Battle_Event.h"
 
 int main() {
-
-	std::cout << std::endl;
-	const Move* m = Move_Pokedex::get_gen1_moves("Growl");
-	m->show_move_values();
-
-	for(const Move* m:Move_Pokedex::get_gen1_default_movesets("Pikachu"))
-		std::cout<<m->m_name<<std::endl;
-
-	Battle_Pokemon bPik(Pokemon_Pokedex::get_gen1_pokemon("Pikachu"));
-	bPik.show_battle_stats();
-	int x[55];
-	std::cout << std::size(x);
+	Battle_Pokemon pk(Pokemon_Pokedex::get_gen1_pokemon(PIKACHU));
+	Battle_Event::display_moves(pk);
+	return 0;
 }

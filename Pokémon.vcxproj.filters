@@ -39,13 +39,7 @@
     <ClCompile Include="Battle_Pokemon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Move Constants.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Battle_Event.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Pokemon Names.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -78,6 +72,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Pokemon Names.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Move_Names.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

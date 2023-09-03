@@ -1,7 +1,5 @@
 #include "Battle_Event.h"
-
 using namespace status_and_stats;
-using namespace Pokemon_names;
 
 Battle_Event::Battle_Event() {
 
@@ -44,6 +42,7 @@ void Battle_Event::speed_check() {
 }
 
 void Battle_Event::random_turn_order() {
+	srand(time(NULL));
 	int random_number = rand() % 2;
 	if (random_number == 0)
 		turn_order[0] = &user, turn_order[1] = &ai;
@@ -70,7 +69,6 @@ void Battle_Event::assign_turn_order(int i) {
 		random_turn_order();
 }
 
-//TODO this should be two functions
 void Battle_Event::turn(Battle_Pokemon* current, Battle_Pokemon* opposing) {
 	Battle_Event::current = current;
 	Battle_Event::opposing = opposing;
@@ -83,22 +81,21 @@ void Battle_Event::turn(Battle_Pokemon* current, Battle_Pokemon* opposing) {
 }
 
 void Battle_Event::human_turn(Battle_Pokemon& bp) {
+
 	display_moves(bp);
 	int user_move_choice = select_move(bp);
-	const Move& chosen_move = retrieve_move_from_map(bp, user_move_choice);
+	const Move& chosen_move = retrieve_move_from_pokemon_movelist(bp, user_move_choice);
 	if (Battle_Event::stun_check(bp)) {
-		//show_stun_message();
+		show_stun_message(NULL);
 		Battle_Event::apply_post_stun(bp);
 		return;
 	}
-	
-	//break()
 	//determine_move_class(chosen_move);
 	//check_fainted();
 	//apply_post_turn_effects();
 }
 
-const Move& Battle_Event::retrieve_move_from_map(Battle_Pokemon& bp, int m) {
+const Move& Battle_Event::retrieve_move_from_pokemon_movelist(Battle_Pokemon& bp, int m) {
 	std::string name = bp.get_battle_pokemon_name();
 	const Move& move = *(Move_Pokedex::get_gen1_default_movesets(name).at(m));
 	if (!is_NULL_MOVE(move))
@@ -112,16 +109,16 @@ void Battle_Event::ai_turn(Battle_Pokemon& bp) {
 }
 
 void Battle_Event::do_move(Battle_Pokemon& bp, const Move& chosen_move) {
+	//inflict damage
 	//inflict_status_effect();
 	//inflict_stats_change();
 }
 
-//TODO we're only couting pointer address
 void Battle_Event::display_moves(Battle_Pokemon& bp) {
 	std::string name = bp.get_battle_pokemon_name();
-	const int MAKE_ARRRAY_HUMAN_READABLE = 1;
-	for (int x = 0; x < Move_constants::MAX_MOVES; ++x)
-		std::cout << x + MAKE_ARRRAY_HUMAN_READABLE << ": " << Move_Pokedex::get_gen1_default_movesets(name).at(x)->m_name << std::endl;
+	const int MAKE_ARRAY_HUMAN_READABLE = 1;
+	for (int x = 0; x < MAX_MOVES; ++x)
+		std::cout << x + MAKE_ARRAY_HUMAN_READABLE << ": " << Move_Pokedex::get_gen1_default_movesets(name).at(x)->get_move_name() << std::endl;
 }
 
 int Battle_Event::select_move(Battle_Pokemon& bp)
@@ -143,7 +140,7 @@ bool Battle_Event::is_valid_move_choice(int choice) {
 }
 
 bool Battle_Event::is_NULL_MOVE(const Move& move) {
-	if (move.m_name == " ")
+	if (move.get_move_name() == NULL_MOVE)
 		return true;
 	return false;
 }
@@ -173,9 +170,10 @@ bool Battle_Event::is_status_effect_a_stun(Battle_Pokemon& bp) {
 }
 
 bool Battle_Event::calculate_if_stunned(Battle_Pokemon& bp) {
-	int lower_limit = 1;
-	int max_limit = 100;
-	int chance = rand() % max_limit + lower_limit;
+	srand(time(NULL));
+	const int LOWER_LIMIT = 1;
+	const int MAX_LIMIT = 100;
+	int chance = rand() % (MAX_LIMIT + 1 - LOWER_LIMIT) + LOWER_LIMIT;
 	if (chance <= bp.get_stun_chance())
 		return true;
 	return false;
@@ -187,7 +185,7 @@ void Battle_Event::show_stun_message(std::string message) {
 
 std::string Battle_Event::get_stun_message(Battle_Pokemon& bp) {
 	//TODO this needs redoing
-	return "what raging fire shall flood the soul?";
+	return "Stunned!";
 }
 
 std::string Battle_Event::normal_stun_message(Battle_Pokemon& current) {
@@ -239,22 +237,28 @@ std::vector<Battle_Pokemon*> Battle_Event::get_targets(const Move& move)
 {
 	std::vector<Battle_Pokemon*>targets;
 	//enemy
-	if (move.is_target_enemy && !move.is_target_self)
+	if (move.get_is_target_enemy())
 		targets.push_back(Battle_Event::opposing);
 	//self
-	if (!move.is_target_enemy && move.is_target_self)
-	targets.push_back(Battle_Event::current);
-	//both
-	if (move.is_target_enemy && move.is_target_self) {
-		targets.push_back(Battle_Event::opposing);
+	if (move.get_is_target_self())
 		targets.push_back(Battle_Event::current);
-	}
+	//both
 	return targets;
+}
+
+int Battle_Event::random_power() {
+	srand(time(NULL));
+	const int LOWER_LIMIT = 75;
+	const int MAX_LIMIT = 100;
+	int chance = rand() % (MAX_LIMIT + 1 - LOWER_LIMIT) + LOWER_LIMIT;
+	return chance;
 }
 
 void Battle_Event::apply_damage(std::vector<Battle_Pokemon*> targets, const Move& move)
 {
-	//int damage = (move.get_power() * Battle_Event::current->modified_attack() / Battle_Event::opposing->modified_defence()) / 50 + 2 * critical() * random() * STAB * type * burn;
+	for (int x = 0; x < targets.size(); ++x)
+		int damage = (move.get_power() * Battle_Event::current->modified_attack() / Battle_Event::opposing->modified_defence())
+		/ 50 + 2 * Battle_Event::current->modified_critical() * random_power() * /*/STAB /*/move.get_type()->get_matchup_value(targets[x]->get_pokemon()->get_type1().get_type()).get_effectiveness();//* burn();
 }
 
 void Battle_Event::battle() {

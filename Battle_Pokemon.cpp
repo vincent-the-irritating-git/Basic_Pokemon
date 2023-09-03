@@ -15,6 +15,7 @@ Battle_Pokemon::~Battle_Pokemon()
 Battle_Pokemon::Battle_Pokemon(const Gen1_Pokemon& pokemon) {
 	pokemon_ptr = &(Pokemon_Pokedex::get_gen1_pokemon(pokemon.get_pokemon_name()));
 	hp = pokemon_ptr->get_m_stats().at(stats_value::HP);
+
 }
 
 std::unordered_map<status_and_stats::stats_value, int> Battle_Pokemon::stats_modifiers{
@@ -32,6 +33,11 @@ std::string Battle_Pokemon::get_battle_pokemon_name()
 {
 	return pokemon_ptr->get_pokemon_name();
 }
+
+const Gen1_Pokemon* Battle_Pokemon::get_pokemon() {
+	return &(Pokemon_Pokedex::get_gen1_pokemon(get_battle_pokemon_name()));
+}
+
 
 void Battle_Pokemon::DEBUG_set_status_effect(Status_Effect_Change& sv){
 	m_status_effect = &sv;
@@ -108,6 +114,6 @@ void Battle_Pokemon::decrement_sleep_counter() {
 
 void Battle_Pokemon::reset_all_stats()
 {
-	for (auto m : Battle_Pokemon::stats_modifiers)
+	for (auto &m : Battle_Pokemon::stats_modifiers)
 		m.second = 0;
 }

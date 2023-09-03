@@ -23,7 +23,7 @@ public:
 	static int select_move(Battle_Pokemon& current);
 	static void do_move(Battle_Pokemon& current, const Move& chosen_move);
 	static void inflict_damage(Battle_Pokemon& bp, const Attack_Move& move);
-	static const Move& retrieve_move_from_map(Battle_Pokemon& bp, int m);
+	static const Move& retrieve_move_from_pokemon_movelist(Battle_Pokemon& bp, int m);
 	static bool is_valid_move_choice(int choice);
 	static bool is_NULL_MOVE(const Move& move);
 	static void DEBUG_SET_USER(Gen1_Pokemon);
@@ -56,4 +56,5 @@ public:
 	static void select_user_pokemon();
 	static void select_enemy_pokemon();
 	static void battle();
+	static int random_power();
 };

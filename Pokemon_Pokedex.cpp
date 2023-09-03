@@ -2,14 +2,13 @@
 #include "Pokemon Names.h"
 
 using namespace status_and_stats;
-using namespace Pokemon_names;
 
 namespace pokemon_definitions {
-	Gen1_Pokemon missingno(-1, "Missingno", Type::NONE, Type::NONE, Pokemon::Evolutions(), Gen1_Pokemon::Gen1_Stats(0, 0, 0, 0, 0));
+	Gen1_Pokemon missingno(-1, MISSINGNO, Type::NONE, Type::NONE, Pokemon::Evolutions(), Gen1_Pokemon::Gen1_Stats(0, 0, 0, 0, 0));
 	//Gen1_Pokemon bulbasaur(1, "Bulbasaur", Type::GRASS, Type::POISON, Pokemon::Evolutions(2, 16), Gen1_Pokemon::Gen1_Stats(45, 49, 49, 65, 45));
-	Gen1_Pokemon pikachu(25, "Pikachu", Type::ELECTRIC, Type::NONE, Pokemon::Evolutions(), Gen1_Pokemon::Gen1_Stats(35, 55, 30, 50, 90));
+	Gen1_Pokemon pikachu(25, PIKACHU, Type::ELECTRIC, Type::NONE, Pokemon::Evolutions(), Gen1_Pokemon::Gen1_Stats(35, 55, 30, 50, 90));
 	//Gen1_Pokemon alakazam(65, "Alakazam", Type::PSYCHIC, Type::NONE, Pokemon::Evolutions(), Gen1_Pokemon::Gen1_Stats(55, 50, 45, 135, 120));
-	Gen1_Pokemon pinsir(127, "Pinsir", Type::BUG, Type::NONE, Pokemon::Evolutions(), Gen1_Pokemon::Gen1_Stats(65, 125, 100, 55, 85));
+	Gen1_Pokemon pinsir(127, PINSIR, Type::BUG, Type::NONE, Pokemon::Evolutions(), Gen1_Pokemon::Gen1_Stats(65, 125, 100, 55, 85));
 	//Gen1_Pokemon moltres(146, "Moltres", Type::FIRE, Type::FLYING, Pokemon::Evolutions(), Gen1_Pokemon::Gen1_Stats(90, 100, 90, 125, 90));
 }
 
